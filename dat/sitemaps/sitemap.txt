@@ -1,0 +1,76 @@
+CSITEA Website Structure
+------------------------
+├── /
+│   ├── BG
+│   │   ├── Линкове
+│   │   ├── Начало
+│   │   ├── Решения
+│   │   ├── DevOps & SysOps
+│   ├── DE
+│   │   ├── Companies
+│   │   ├── DevOps & SysOps
+│   │   ├── Die Verfasser
+│   │   ├── Galerie
+│   │   ├── Startseite
+│   │   ├── IT Dienstleistungen
+│   │   ├── Kontakt
+│   │   ├── Links
+│   │   ├── Lösungen
+│   │   ├── Nachrichten & Veranstaltungen
+│   │   ├── Quellen
+│   │   ├── Über das Dirigieren
+│   │   ├── urls-reporter
+│   │   │   │   ├── IT-Architektur
+│   │   │   │   ├── Projektmanagement
+│   │   │   │   ├── Office Location
+│   │   │   │   ├── CMS+
+│   │   │   │   ├── Infra Solution
+│   │   │   │   ├── Energy Calculator
+│   │   │   │   ├── SMS
+│   ├── EN
+│   │   ├── About us
+│   │   ├── DevOps & SysOps
+│   │   ├── Gallery
+│   │   ├── Geek Corner
+│   │   ├── Home
+│   │   ├── IT Consulting
+│   │   ├── IT Services
+│   │   ├── Links
+│   │   ├── News & Events
+│   │   ├── Solutions
+│   │   ├── Technology
+│   │   │   │   ├── Backend Development
+│   │   │   │   ├── IT Architecture
+│   │   │   │   ├── Mobile Development
+│   │   │   │   ├── Project Management
+│   │   │   │   ├── Web Development
+│   │   │   │   ├── CMS+
+│   │   │   │   ├── Energy Calculator
+│   │   │   │   ├── SMS - Site Monitoring Solution
+│   │   │   │   ├── Infra Solution
+│   │   │   │   ├── Web Store solution
+│   │   │   │   ├── Product modularity approach
+│   │   │   │   ├── R & D Principles
+│   │   │   │   │   │   ├── PMSUB
+│   │   │   │   │   │   ├── pmsub2
+│   ├── FI
+│   │   ├── Alku
+│   │   ├── Galleria
+│   │   ├── IT Konsultointi Palvelut
+│   │   ├── IT Palvelut
+│   │   ├── DevOps & SysOps
+│   │   ├── Lähdeteokset
+│   │   ├── Linkit
+│   │   ├── Ratkaisut
+│   │   ├── Nörtinnurkkaus
+│   │   ├── Tekijät
+│   │   ├── Uutiset & tapahtumat
+│   │   ├── Yhteystiedot
+│   │   ├── YUhtiöt
+│   │   │   │   ├── IT-arkkitehtuuri
+│   │   │   │   ├── Projektien Managerointia
+│   │   │   │   ├── CMS+
+│   │   │   │   ├── Energy Calculator
+│   │   │   │   ├── Infra Solution
+│   │   │   │   ├── Sävellysten luettelo
+│   │   │   │   ├── Toimoston sijainti

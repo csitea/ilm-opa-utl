@@ -1,0 +1,121 @@
+version: "3.9"
+
+services:
+  # FRONT-END
+  # admin-tool-js:
+  #   image: wpp-dev-admin-tool-js
+  #   pull_policy: never
+  #   secrets:
+  #     - gitlab_token
+  #   env_file: "admin-tool-js/.env"
+  #   build:
+  #     context: ../../../..
+  #     dockerfile: "./wpp/ilm-opa-utl/src/docker/admin-tool-js/Dockerfile.${PROCESSOR_ARCHITECTURE:-x86_64}"
+  #     args:
+  #         GITLAB_TOKEN: "${GITLAB_TOKEN:?emerg: GITLAB_TOKEN environment variable is not set}"
+  #         GID: "${GID}"
+  #         UID: "${UID}"
+  #         ORG_DIR: ${ORG_DIR}
+  #         APPUSR: ${APPUSR}
+  #         APPGRP: ${APPGRP}
+  #         WUI_PROJ_PATH: "${WUI_PROJ_PATH}"
+  #   volumes:
+  #     - "/opt/csi:/opt/csi"
+  #     - "~/.ssh:${HOME_DIR}/.ssh"
+  #     - "~/.config:${HOME_DIR}/.config"
+  #     - "~/.gcp:${HOME_DIR}/.gcp"
+  #     - "~/.npm:${HOME_DIR}/.npm"  # allow npm to reuse cache from local files
+  #   ports:
+  #     - "${WUI_APP_PORT}:${WUI_APP_PORT}"
+  #   command: ["bash", "/opt/ilm/wpp/ilm-opa-utl/src/bash/scripts/start-wpp-dev-admin-tool-js.sh"]
+  #   networks:
+  #     - wpp_local_dev_docker_network
+  wpp:
+    image: wpp-dev-wpp
+    pull_policy: never
+    # secrets:
+    #   - gitlab_token
+    env_file: "wpp/.env"
+    build:
+      context: ../../../..
+      dockerfile: "./ilm-opa/ilm-opa-utl/src/docker/wpp/Dockerfile"
+      args:
+        GID: "${GID}"
+        UID: "${UID}"
+        ORG_DIR: ${ORG_DIR}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        WUI_PROJ_PATH: "${WUI_PROJ_PATH}"
+        DB_NAME: wordpress_db
+        DB_USER: wordpress
+        DB_PASSWORD: wordpress
+        DB_HOST: db
+        DB_PORT: 3306
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: wordpress
+      DB_PASSWORD: wordpress
+      DB_NAME: wordpress_db
+    volumes:
+      - "/opt/csi:/opt/csi"
+    depends_on:
+      - db
+    ports:
+      - "${WUI_APP_PORT}:80"
+    networks:
+      - wpp_local_dev_docker_network
+
+  # BACK-END
+  db:
+    image: maria-db
+    env_file: "db/.env"
+    build:
+      context: ../../../..
+      dockerfile: "./ilm-opa/ilm-opa-utl/src/docker/db/Dockerfile"
+      args:
+        GID: "${GID}"
+        UID: "${UID}"
+        ORG_DIR: ${ORG_DIR}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        WUI_PROJ_PATH: "${WUI_PROJ_PATH}"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    ports:
+      - "3306:3306" # To access mysql from localhost
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      #- db_data:/var/lib/mysql
+      - "../../../..:${ORG_PATH}"
+      - "~/.ssh:${HOME_DIR}/.ssh"
+      - "~/.config:${HOME_DIR}/.config"
+      - "~/.gcp:${HOME_DIR}/.gcp"
+    #command: ["bash", "/opt/ilm/wpp/ilm-opa-utl/src/bash/scripts/start-db-dev.sh"]
+    networks:
+      - wpp_local_dev_docker_network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+    ports:
+      - "8000:80"
+    networks:
+      - wpp_local_dev_docker_network
+networks:
+  wpp_local_dev_docker_network:
+    driver: bridge

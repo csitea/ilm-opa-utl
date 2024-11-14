@@ -1,0 +1,88 @@
+services:
+  wpb:
+    image: wpb-dev-wpb
+    pull_policy: never
+    env_file: ".env"
+    build:
+      context: ../../../..
+      dockerfile: "./ilm-opa/ilm-opa-utl/src/docker/wpb/Dockerfile"
+      args:
+        GID: "${GID:-}"
+        UID: "${UID:-}"
+        ORG_PATH: ${ORG_PATH:-}
+        APPUSR: ${APPUSR:-}
+        APPGRP: ${APPGRP:-}
+        WUI_PROJ_PATH: "${WUI_PROJ_PATH:-}"
+        DB_NAME: wordpress_db
+        DB_USER: wordpress
+        DB_PASSWORD: wordpress
+        DB_HOST: db
+        DB_PORT: 3306
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: wordpress
+      DB_PASSWORD: wordpress
+      DB_NAME: wordpress_db
+    volumes:
+      - "../../../..:${APP_PATH:-}"
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    networks:
+      - wpb_local_dev_docker_network
+
+  # BACK-END
+  db:
+    image: maria-db
+    env_file: ".env"
+    build:
+      context: ../../..
+      dockerfile: "./ilm-opa-utl/src/docker/db/Dockerfile"
+      args:
+        GID: "${GID}"
+        UID: "${UID}"
+        ORG_PATH: ${ORG_PATH}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        WUI_PROJ_PATH: "${WUI_PROJ_PATH}"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: wordpress_db
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    ports:
+      - 3306:3306
+    cap_add:
+      - SYS_NICE
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    volumes:
+      - "../../..:${APP_PATH}"
+      - "$HOME/.ssh:${HOME_PATH}/.ssh"
+      - "$HOME/.config:${HOME_PATH}/.config"
+      - "$HOME/.gcp:${HOME_PATH}/.gcp"
+      #- db_data:/var/lib/mysql
+    #command: ["bash", "/opt/ilm/wpb/ilm-opa-utl/src/bash/scripts/start-db-dev.sh"]
+    networks:
+      - wpb_local_dev_docker_network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: wordpress
+      PMA_PASSWORD: wordpress
+    ports:
+      - 8000:80
+    networks:
+      - wpb_local_dev_docker_network
+networks:
+  wpb_local_dev_docker_network:
+    driver: bridge

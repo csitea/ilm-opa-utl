@@ -1,0 +1,169 @@
+version: "3.9"
+
+services:
+  # THE CONFIGURATION VALIDATOR
+  conf-validator:
+    image: img-conf-validator
+    container_name: con-ilm-opa-conf-validator
+    pull_policy: never
+    env_file: ".env"
+    build:
+      context: ../../..
+      dockerfile: "./${ORG}-${APP}-utl/src/docker/conf-validator/Dockerfile"
+      args:
+        GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+        GID: ${GID}
+        UID: ${UID}
+        APP_PATH: ${APP_PATH}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        DOCKER_HOME: ${DOCKER_HOME}
+        UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+        TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+        INF_PROJ_PATH: ${INF_PROJ_PATH}
+        CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+        HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+        HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+        HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+        HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+    environment:
+      GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+      GID: ${GID}
+      UID: ${UID}
+      APP_PATH: ${APP_PATH}
+      APPUSR: ${APPUSR}
+      APPGRP: ${APPGRP}
+      DOCKER_HOME: ${DOCKER_HOME}
+      UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+      TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+      INF_PROJ_PATH: ${INF_PROJ_PATH}
+      CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+      HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+      HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+      HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+      HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+    volumes:
+      - "../../..:${APP_PATH}"
+      - "~/.ssh:${DOCKER_HOME}/.ssh"
+      - "~/.config:${DOCKER_HOME}/.config"
+      - "~/.aws:${DOCKER_HOME}/.aws"
+      - "~/.gcp:${DOCKER_HOME}/.gcp"
+    command:
+      [
+        "bash",
+        "${HOME_UTL_PROJ_PATH}/src/bash/scripts/docker-init-conf-validator.sh",
+      ]
+    networks:
+      - csi_wpp_all_lde_docker_net
+  # THE TEMPLATE GENERATOR
+  tpl-gen:
+    image: img-tpl-gen
+    container_name: con-ilm-opa-tpl-gen
+    pull_policy: never
+    env_file: ".env"
+    build:
+      context: ../../..
+      dockerfile: "./${ORG}-${APP}-utl/src/docker/tpl-gen/Dockerfile"
+      args:
+        GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+        GID: ${GID}
+        UID: ${UID}
+        APP_PATH: ${APP_PATH}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        DOCKER_HOME: ${DOCKER_HOME}
+        UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+        TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+        INF_PROJ_PATH: ${INF_PROJ_PATH}
+        CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+        HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+        HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+        HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+        HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+    environment:
+      GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+      GID: ${GID}
+      UID: ${UID}
+      APP_PATH: ${APP_PATH}
+      APPUSR: ${APPUSR}
+      APPGRP: ${APPGRP}
+      DOCKER_HOME: ${DOCKER_HOME}
+      UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+      TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+      INF_PROJ_PATH: ${INF_PROJ_PATH}
+      CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+      HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+      HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+      HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+      HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+    volumes:
+      - "../../..:${APP_PATH}"
+      - "~/.ssh:${DOCKER_HOME}/.ssh"
+      - "~/.config:${DOCKER_HOME}/.config"
+      - "~/.aws:${DOCKER_HOME}/.aws"
+      - "~/.gcp:${DOCKER_HOME}/.gcp"
+    command:
+      ["bash", "${HOME_UTL_PROJ_PATH}/src/bash/scripts/docker-init-tpl-gen.sh"]
+    networks:
+      - csi_wpp_all_lde_docker_net
+  # THE TEMPLATE GENERATOR
+  tf-runner:
+    image: img-tf-runner
+    container_name: con-ilm-opa-tf-runner
+    pull_policy: never
+    env_file: ".env"
+    build:
+      context: ../../..
+      dockerfile: "./${ORG}-${APP}-utl/src/docker/tf-runner/Dockerfile"
+      args:
+        GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+        GID: ${GID}
+        UID: ${UID}
+        APP_PATH: ${APP_PATH}
+        APPUSR: ${APPUSR}
+        APPGRP: ${APPGRP}
+        DOCKER_HOME: ${DOCKER_HOME}
+        UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+        TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+        INF_PROJ_PATH: ${INF_PROJ_PATH}
+        CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+        HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+        HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+        HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+        HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+        TF_VERSION: ${TF_VERSION}
+        TF_SWITCH_VERSION: ${TF_SWITCH_VERSION}
+    environment:
+      GITHUB_TOKEN: "${GITHUB_TOKEN:?emerg: GITHUB_TOKEN environment variable is not set}"
+      GID: ${GID}
+      UID: ${UID}
+      APP_PATH: ${APP_PATH}
+      APPUSR: ${APPUSR}
+      APPGRP: ${APPGRP}
+      DOCKER_HOME: ${DOCKER_HOME}
+      UTL_PROJ_PATH: ${UTL_PROJ_PATH}
+      TPG_PROJ_PATH: ${TPG_PROJ_PATH}
+      INF_PROJ_PATH: ${INF_PROJ_PATH}
+      CNF_PROJ_PATH: ${CNF_PROJ_PATH}
+      HOME_UTL_PROJ_PATH: ${HOME_UTL_PROJ_PATH}
+      HOME_TPG_PROJ_PATH: ${HOME_TPG_PROJ_PATH}
+      HOME_CNF_PROJ_PATH: ${HOME_CNF_PROJ_PATH}
+      HOME_INF_PROJ_PATH: ${HOME_INF_PROJ_PATH}
+    volumes:
+      - "../../..:${APP_PATH}"
+      - "~/.ssh:${DOCKER_HOME}/.ssh"
+      - "~/.config:${DOCKER_HOME}/.config"
+      - "~/.aws:${DOCKER_HOME}/.aws"
+      - "~/.gcp:${DOCKER_HOME}/.gcp"
+    command:
+      [
+        "bash",
+        "${HOME_UTL_PROJ_PATH}/src/bash/scripts/docker-init-tf-runner.sh",
+      ]
+    networks:
+      - csi_wpp_all_lde_docker_net
+# Define the network for the containers to communicate
+networks:
+  csi_wpp_all_lde_docker_net:
+    driver: bridge
+# eof file: /opt/ilm/ilm-opa/ilm-opa-utl/src/docker/docker-compose-ilm-opa-infra.yaml

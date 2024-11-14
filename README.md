@@ -15,25 +15,25 @@ APPLICATION=ilm-opa
 find $BASE_PATH/$ORG/$APPLICATION -maxdepth 1|sort
 
 # the APPLICTION_PATH
-/opt/str/ilm-opa
+/opt/ilm/ilm-opa
 
 # the configuration project for the ilm-opa application
-/opt/str/ilm-opa/ilm-opa-cnf
+/opt/ilm/ilm-opa/ilm-opa-cnf
 
 # the infrastucture project
-/opt/str/ilm-opa/ilm-opa-inf
+/opt/ilm/ilm-opa/ilm-opa-inf
 
 # the utils project - where the local dev env utilities residue
-/opt/str/ilm-opa/ilm-opa-utl
+/opt/ilm/ilm-opa/ilm-opa-utl
 
 # the web ui project - the web ui src
-/opt/str/ilm-opa/ilm-opa-wui
+/opt/ilm/ilm-opa/ilm-opa-wui
 
 # the GLOBAL csi infra-core
-/opt/str/ilm-opa/infra-core
+/opt/ilm/ilm-opa/infra-core
 
 # the GLOBAL template generator project
-/opt/str/ilm-opa/tpl-gen
+/opt/ilm/ilm-opa/tpl-gen
 ```
 
 Of course your BASE_PATH COULD be ( but probably shouldn't ) also anything like /var, ~/opt , ~/var etc...
@@ -107,8 +107,8 @@ Build in this context means "syntax check, autoformat and build ( if applicable)
 
 ```bash
 # override if needed 
-# SRC=/opt/str/ilm-opa/ilm-opa-cnf/ TGT=/opt/str/ilm-opa/ilm-opa-cnf
-export STEP=012-static-sites; ORG=ilm APP=opa ENV=dev TPL_SRC=/opt/str/ilm-opa/ilm-opa-inf  make do-generate-config-for-step
+# SRC=/opt/ilm/ilm-opa/ilm-opa-cnf/ TGT=/opt/ilm/ilm-opa/ilm-opa-cnf
+export STEP=012-static-sites; ORG=ilm APP=opa ENV=dev TPL_SRC=/opt/ilm/ilm-opa/ilm-opa-inf  make do-generate-config-for-step
 
 ```
 
@@ -148,16 +148,16 @@ Simply run `make` to start the setup.
 
 to replicate 
 ```bash
-SRC_PATH=/opt/str/ilm-opa/ilm-opa-utl/src/bash/ bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_to_bas
-SRC_PATH=/opt/str/ilm-opa/ilm-opa-wui/.github/ bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_to_bas
-SRC_PATH=/opt/str/ilm-opa/ilm-opa-utl/src/bash/run/run.sh bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_replicate_file_to_bas
+SRC_PATH=/opt/ilm/ilm-opa/ilm-opa-utl/src/bash/ bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_to_bas
+SRC_PATH=/opt/ilm/ilm-opa/ilm-opa-wui/.github/ bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_to_bas
+SRC_PATH=/opt/ilm/ilm-opa/ilm-opa-utl/src/bash/run/run.sh bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_replicate_file_to_bas
 ```
 
 ```bash
-TGT_PATH=/opt/str/ilm-opa/ilm-opa-utl/src/bash/run bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_from_bas
-TGT_PATH=/opt/str/ilm-opa/ilm-opa-utl/src/bash/run/run.sh bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_replicate_file_from_bas
+TGT_PATH=/opt/ilm/ilm-opa/ilm-opa-utl/src/bash/run bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_replicate_dir_from_bas
+TGT_PATH=/opt/ilm/ilm-opa/ilm-opa-utl/src/bash/run/run.sh bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_replicate_file_from_bas
 ```
 
 ```bash
-SRC_PATH=/opt/str/ilm-opa/ilm-opa-utl/src/bash/run bash /opt/str/ilm-opa/ilm-opa-utl/run -a do_broadcast_dir_from_bas
+SRC_PATH=/opt/ilm/ilm-opa/ilm-opa-utl/src/bash/run bash /opt/ilm/ilm-opa/ilm-opa-utl/run -a do_broadcast_dir_from_bas
 ``` 

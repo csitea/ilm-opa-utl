@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  db-adminer:
+    image: adminer
+    container_name: ${ADM_CONTAINER}
+    environment:
+      ADMINER_DESIGN: "pepa-linha"
+      PS1: ' \u@\h on \w\n\n  '
+    # ports:
+    #   - "8090:8080"
+    volumes:
+      - "${APP_PATH}:${APP_PATH}"
+    network_mode: host
+#     # Optionally specify a network mode other than 'host', such as a custom bridge network
+#     # network_mode: bridge
+#     networks:
+#       - adminer-net
+
+# networks:
+#   adminer-net:
+#     driver: bridge
