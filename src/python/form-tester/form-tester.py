@@ -9,14 +9,14 @@ from rich.pretty import pprint
 console = Console(width=150, color_system="256")
 
 # Define URLs and headers
-form_url = "https://dev.mmp.flok.fi/form-stub/"
-ajax_url = "https://dev.mmp.flok.fi/wp-admin/admin-ajax.php"
+form_url = "https://dev.opa.ilmatarbrain.com/form-stub/"
+ajax_url = "https://dev.opa.ilmatarbrain.com/wp-admin/admin-ajax.php"
 headers = {
     'Accept': '*/*',
     'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8,de;q=0.7',
     'Connection': 'keep-alive',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-    'Origin': 'https://dev.mmp.flok.fi',
+    'Origin': 'https://dev.opa.ilmatarbrain.com',
     'Referer': form_url,
     'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1',
     'X-Requested-With': 'XMLHttpRequest'

@@ -13,10 +13,10 @@ ORG=ilm APP=opa make do-setup-app-inf
 
 
 # how-to ssh to tst
-ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-tst-wpb.pk debian@tst.mmp.flok.fi
+ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-tst-wpb.pk debian@tst.opa.ilmatarbrain.com
 
 # how-to ssh to dev
-ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-dev-wpb.pk debian@dev.mmp.flok.fi
+ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-dev-wpb.pk debian@dev.opa.ilmatarbrain.com
 
 
 # re-provision 

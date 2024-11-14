@@ -8,12 +8,12 @@ do_ssh_key_pair_gen() {
     sudo apt-get update && sudo apt-get install -y expect
   fi
 
-  # id_rsa.sys+bas-wpb-int-creds@flok.fi.pub
+  # id_rsa.sys+bas-wpb-int-creds@ilmatarbrain.com.pub
   do_require_var ORG ${ORG:-}
   do_require_var APP ${APP:-}
   do_require_var DOMAIN ${DOMAIN:-}
 
-  #/home/ysg/.ssh/.str/id_rsa.sys+ilm-opa-crs@flok.fi.pub
+  #/home/ysg/.ssh/.str/id_rsa.sys+ilm-opa-crs@ilmatarbrain.com.pub
   local GIT_USER_EMAIL="sys+$ORG-$APP-crs@$DOMAIN"
 
   local FNAME=id_rsa.$GIT_USER_EMAIL

@@ -32,7 +32,7 @@ do_sync_wui_to_remote_host() {
   # ~/.ssh/.str/bas-wpb-dev-wpb.pub
   export SSH_KEY_PATH="~/.ssh/.$ORG/$ORG-$APP-${ENV}-$APP.pk" # SSH key path
   export TGT_USER="debian"                                    # Source user
-  # https://bas.wpb.dev.gcp.flok.fi/
+  # https://bas.wpb.dev.gcp.ilmatarbrain.com/
   export TGT_HOST=$cur_wpb_fqdn                                    # Source host
   export TGT_DIR="/var/www/html"                                   # Source directory
   export DEFAULT_SRC_DIR="${APP_PATH}/$ORG-$APP-wui/src/web/html/" # Target directory

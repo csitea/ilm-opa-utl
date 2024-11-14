@@ -8,7 +8,7 @@ Use the following command to set up SSH port forwarding:
 
 ```bash
 
-ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-dev-wpb.pk -L 0.0.0.0:9091:localhost:3306 -N -v debian@csi.wpb.dev.flok.fi
+ssh -o IdentitiesOnly=yes -i ~/.ssh/.str/ilm-opa-dev-wpb.pk -L 0.0.0.0:9091:localhost:3306 -N -v debian@csi.wpb.dev.ilmatarbrain.com
 
 ```
 
